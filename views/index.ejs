@@ -1,0 +1,78 @@
+
+//<%-include('include/_header') %>
+//<%-include('include/_footer') %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUDE APP</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header id="header">
+<nav>
+    <div class="containe">
+    <div class="text-center">
+        <a href="/" class="nav-brand text-dark">Registration</a>
+
+    </div>>
+
+    </div>
+</nav>
+
+    </header>
+    <form action="/" method="POST">
+<table class="table">
+    <thread class="thread-dark">
+        <tr>
+            <th><input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
+                <label for="vehicle1"> </label><br></th>
+            <th> </th>
+            <th>Name</th>
+            <th>@Email</th>
+            <th>Phone</th>
+            <th>City</th>
+            <th>Postcode</th>
+            <th></th>
+        </tr>
+    </thread>
+    <tbody>
+        <% for(let i=0;i<data.length;i++){%>
+        <tr>
+            <th><input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
+                <label for="vehicle1"> I have a bike</label><br></th>
+            <th><img src=<%= '/images/'+data[i].image %> alt="Could not load" width="100px"></td></th>
+            <th><%=data[i].Name%></th>
+            <th><%=data[i].Email%></th>
+            <th><%=data[i].Phone%></th>
+            <th><%=data[i].City%></th>
+            <th><%=data[i].Postcode%></th>
+            <th>
+                <a href="#" class="btn-border-shadow update">
+                    <span class="text-gradient">
+                        <i class="fas fa-pencil-alt"></i>
+                    </span>
+                </a>
+
+                <a href="#" class="btn-border-shadow update">
+                    <span class="text-gradient">
+                        <i class="fas fa-times"></i>
+                    </span>
+                </a>
+
+            </th>
+        </tr>
+        <%}%>
+    </tbody>
+</table>
+</form>
+
+
+
+
+
+</body>
+</html>

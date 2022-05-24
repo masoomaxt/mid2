@@ -1,0 +1,85 @@
+const Todo=require('../models/appmodel.js')
+const path=require('path')
+
+const displayform=async(req, res)=>{
+    res.render('home', {name:'MT'})
+}
+
+const edisplayAdduserpag=async(req, res)=>{
+    res.render('adduser');
+}
+const adduser=async(req, res)=>{
+
+    const {image}=req.files
+    image.mv(path.resolve(__dirname,'../public/images',image.name),(error)=>{
+        if(!error){
+
+            Todo.create({...req.body,image:image.name},(error, item)=>{
+                if(!error){
+                    res.redirect('/api/viewAllUsers')
+                }
+                
+                else{
+                    res.redirect('/api/displayAdduserpage')
+                }
+            })
+        }
+        else{
+            console.log(error)
+        }
+    })
+
+}
+
+const viewAllUsers=async(req, res)=>{
+    
+    const data=await Todo.find()
+    res.render('index', {data})
+}
+
+const deleteuser=async(req, res)=>{
+    const {id}=req.query
+    const deletedItem=await Todo.findByIdAndRemove(id)
+    const data=await Todo.find()
+    res.render('index', {data})
+}
+const updateuser=async(req, res)=>{
+    const {id}=req.query
+    const data=await Todo.findById(id)
+    res.render('adduser', {data})
+}
+
+const updateuserbyid=async(req, res)=>{
+    const {name}=req.body
+    const {email}=req.body
+    const {phone}=req.body
+    const {city}=req.body
+    const {postcode}=req.body
+    const {image}=req.files
+    const {id}=req.query
+    image.mv(path.resolve(__dirname,'../public/images', image.name),(error)=>{
+        if(!error){
+            Todo.findByIdAndUpdate(id,{description:description,image:image.name},(error, doc)=>{
+                if(!error){
+                    res.redirect('/api/viewAllUsers')
+                }
+                else{
+                    res.redirect('/api/updateuser')
+                }
+            })
+
+        }
+        else{
+            res.redirect('/api/updateuser')
+        }
+    })
+}
+module.exports={
+    displayform,
+    displayAdduserpage,
+    adduser,
+    viewAllUsers,
+    deleteuser,
+    updateuser,
+    updateuserbyid
+}
